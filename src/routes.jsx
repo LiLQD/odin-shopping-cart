@@ -1,7 +1,7 @@
 import Home from "./Home";
-import Shop from "./Shop";
 import Cart from "./Cart";
 import ErrorPage from "./ErrorPage";
+import Product from "./Product";
 const routes = [
   {
     path: "/",
@@ -9,8 +9,8 @@ const routes = [
     errorElement: <ErrorPage />,
   },
   {
-    path: "/shop",
-    element: <Shop />,
+    path: "/products",
+    element: <Product />,
   },
   {
     path: "/cart",
