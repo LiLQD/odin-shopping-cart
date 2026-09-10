@@ -8,35 +8,32 @@ const useCategoryItems = (category) => {
 
   useEffect(() => {
     if (!category) return;
-    let ignore = false;
-
+    let controller = new AbortController();
     function fetchData() {
       setIsLoading(true);
       setError(null);
-      getEquipmentCategory(category)
+      getEquipmentCategory(category, controller.signal)
         .then((categoryData) =>
           Promise.all(
             categoryData.equipment.map((stub) =>
-              getEquipmentDetail(stub.index),
+              getEquipmentDetail(stub.index, controller.signal),
             ),
           ),
         )
         .then((details) => {
-          if (!ignore) setItems(details);
+          setItems(details);
+          setIsLoading(false);
         })
         .catch((err) => {
-          if (!ignore) setError(err);
-        })
-        .finally(() => {
-          if (!ignore) setIsLoading(false);
+          if (err.name === "AbortError") return;
+          setError(err);
+          setIsLoading(false);
         });
     }
     fetchData();
 
-    return () => {
-      ignore = true;
-    };
-  });
+    return () => controller.abort;
+  }, [category]);
 
   return [items, isLoading, error];
 };
