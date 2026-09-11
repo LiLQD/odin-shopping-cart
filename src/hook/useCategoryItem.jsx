@@ -16,7 +16,7 @@ const useCategoryItems = (category) => {
         .then((categoryData) =>
           Promise.all(
             categoryData.equipment.map((stub) =>
-              getEquipmentDetail(stub.index, controller.signal),
+              getEquipmentDetail(stub.url, controller.signal),
             ),
           ),
         )
@@ -35,7 +35,7 @@ const useCategoryItems = (category) => {
     return () => controller.abort;
   }, [category]);
 
-  return [items, isLoading, error];
+  return { items, isLoading, error };
 };
 
 export default useCategoryItems;
