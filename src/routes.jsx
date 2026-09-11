@@ -1,8 +1,11 @@
-import Home from "./Home";
-import Cart from "./Cart";
-import ErrorPage from "./ErrorPage";
-import Product from "./Product";
-import Category from "./Category";
+import Home from "./component/Home";
+import Cart from "./component/Cart";
+import ErrorPage from "./component/ErrorPage";
+import Product from "./component/Product";
+import Category from "./component/Category";
+import ItemDetail from "./component/ItemDetail";
+import ProductIndex from "./component/ProductIndex";
+
 const routes = [
   {
     path: "/",
@@ -15,8 +18,16 @@ const routes = [
     errorElement: <ErrorPage />,
     children: [
       {
+        index: true,
+        element: <ProductIndex />,
+      },
+      {
         path: ":category",
         element: <Category />,
+      },
+      {
+        path: ":category/:index",
+        element: <ItemDetail />,
       },
     ],
   },
