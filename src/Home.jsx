@@ -61,7 +61,7 @@ function Home() {
 
       <footer className="footer">
         <p>
-          &copy; {new Date().getFullYear()} Ye Olde Emporium — trusted across
+          &copy; {new Date().getFullYear()} Ye Oldin Emporium — trusted across
           all Nine Realms.
         </p>
       </footer>
