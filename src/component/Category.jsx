@@ -1,24 +1,19 @@
+import "../styles/Category.css";
 import { useParams } from "react-router";
-import useCategoryItems from "./hook/useCategoryItem";
+import useCategoryItems from "../hook/useCategoryItem";
+import Item from "./Item";
+
 const Category = () => {
   const { category } = useParams();
   const { items, isLoading, error } = useCategoryItems(category);
   if (isLoading) return <p>Loading {category}...</p>;
   if (error) return <p>Something went wrong</p>;
   return (
-    <ul>
+    <div className="item-list">
       {items.map((item) => (
-        <li key={item.index}>
-          <strong>{item.name}</strong>
-          {item.cost && (
-            <span>
-              {" "}
-              - {item.cost.quantity} {item.cost.unit}
-            </span>
-          )}
-        </li>
+        <Item key={item.index} {...item} />
       ))}
-    </ul>
+    </div>
   );
 };
 
