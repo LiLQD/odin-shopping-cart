@@ -1,17 +1,22 @@
-import { Link, Outlet } from "react-router";
+import { NavLink, Outlet } from "react-router";
+import Navbar from "./Navbar";
+import "../styles/Product.css";
+
 const Product = () => {
   return (
-    <div>
-      <nav>
-        <Link to="/">Home</Link>
-        <Link to="/cart">Cart</Link>
-      </nav>
-      <aside>
-        <Link to="weapon">Weapons</Link>
-        <Link to="armor">Armor</Link>
-        <Link to="potion">Potions</Link>
-      </aside>
-      <Outlet />
+    <div className="product-page">
+      <Navbar />
+      <div className="product-layout">
+        <aside className="category-sidebar">
+          <h3>Categories</h3>
+          <NavLink to="weapon">⚔ Weapons</NavLink>
+          <NavLink to="armor">🛡 Armor</NavLink>
+          <NavLink to="potion">🧪 Potions</NavLink>
+        </aside>
+        <main className="product-content">
+          <Outlet />
+        </main>
+      </div>
     </div>
   );
 };
